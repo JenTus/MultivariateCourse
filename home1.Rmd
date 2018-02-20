@@ -1,6 +1,6 @@
 ---
 title: "Homework1"
-output: github_document
+output: html_document
 ---
 
 ## Q1
@@ -24,12 +24,14 @@ covariance <- function(x){
 }
 
 D1.cov <- covariance(D1)
+cov(D1)
+D1.cov
 ```
 
 ## Q2
 
 Create an R-function that takes a full-rank covariance matrix $A \in \mathbb{R}^{p\times p}$ as
-an argument and returns the square root of the inverse matrix such that $A^{-\frac{1}{2}}A^{-\frac{1}{2}} = A^{-}$
+an argument and returns the square root of the inverse matrix such that $A^{-\frac{1}{2}}A^{-\frac{1}{2}} = A^{-1}$
 
 ## Code of Q2
 
