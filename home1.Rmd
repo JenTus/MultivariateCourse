@@ -12,8 +12,9 @@ not use the built-in functions cov(), cor() or any additional R-packages.
 ## Code of Q1
 
 
-```{r cars}
-D1 <- as.matrix(read.table("data\Data1.txt", sep = "\t", header = F))
+```{r}
+
+D1 <- as.matrix(read.table("data/Data1.txt", sep = "\t", header = F))
 
 covariance <- function(x){
   ave <- apply(x, 2, mean)
@@ -23,15 +24,44 @@ covariance <- function(x){
 }
 
 D1.cov <- covariance(D1)
-cov(D1)
 ```
 
-## Including Plots
+## Q2
 
-You can also embed plots, for example:
+Create an R-function that takes a full-rank covariance matrix $A \in \mathbb{R}^{p\times p}$ as
+an argument and returns the square root of the inverse matrix such that $A^{-\frac{1}{2}}A^{-\frac{1}{2}} = A^{-}$
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+## Code of Q2
+
+```{r}
+trans_square_root <- function(x){
+  lam <- eigen(x)$values
+  gam <- eigen(x)$vectors
+  
+  eigen_value <- sqrt(solve(diag(lam)))
+  
+  return(gam %*% eigen_value %*% t(gam))
+}
+
+trans_square_root(D1.cov)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Q3
+
+Create an R-function that takes a full-rank covariance matrix A as an argument and returns the corresponding correlation matrix.
+
+## Code of Q3
+
+```{r}
+correlation <- function(x){
+  x.diag <- diag(diag(x))
+  
+  corr <- sqrt(solve(x.diag)) %*% x %*% sqrt(solve(x.diag))
+  
+  return(corr)
+}
+
+correlation(D1.cov)
+cor(D1)
+```
+
