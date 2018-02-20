@@ -1,6 +1,6 @@
 ---
 title: "Homework1"
-output: html_document
+output: github_document
 ---
 
 ## Q1
