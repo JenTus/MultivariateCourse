@@ -4,15 +4,7 @@ home2
 Problem Description
 -------------------
 
-Simulate 100 observations from bivariate normal distribution with parameters: $\\left(\\begin{array} 4 \\\\ 7 \\end{array}\\right)$ `$ \mu = \begin{pmatrix} 4 \\ 7 \end{pmatrix}; \Sigma = \begin{pmatrix} 10 & 6 \\ 6 & 8 \end{pmatrix} $`
-
-$$
-\\begin{eqnarray}
-P(|X-\\mu| &gt; k) & = & P(|X-\\mu|^2 &gt; k^2)\\\\
-& \\leq & \\frac{\\mathbb{E}\\left\[|X-\\mu|^2\\right\]}{k^2}\\\\
-& \\leq & \\frac{\\mathrm{Var}\[X\]}{k^2}
-\\end{eqnarray}
-$$
+Simulate 100 observations from bivariate normal distribution.
 
 Q1
 --
