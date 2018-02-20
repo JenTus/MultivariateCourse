@@ -1,22 +1,29 @@
 ---
-title: "Untitled"
+title: "Homework1"
 output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+## Q1
 
-## GitHub Documents
+Create an R-function that takes a data matrix $X \in \mathbb{R}^{n\times p}, n> p$, as an
+argument and returns the unbiased estimator of the covariance matrix. Do
+not use the built-in functions cov(), cor() or any additional R-packages.
 
-This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
+## Code of Q1
 
-## Including Code
-
-You can include R code in the document as follows:
 
 ```{r cars}
-summary(cars)
+D1 <- as.matrix(read.table("data\Data1.txt", sep = "\t", header = F))
+
+covariance <- function(x){
+  ave <- apply(x, 2, mean)
+  cent <- sweep(x, 2, ave, "-")
+  cova <- t(cent) %*% cent / (dim(x)[1]-1)
+  return(cova)
+}
+
+D1.cov <- covariance(D1)
+cov(D1)
 ```
 
 ## Including Plots
