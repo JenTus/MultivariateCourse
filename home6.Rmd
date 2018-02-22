@@ -21,7 +21,7 @@ Form the row and column profiles.
 
 ```{r}
 smok <- read.table("data/SMOKING.txt", header = TRUE, row.names = 1)
-smok <- smok[(1:5),(1:4)]
+smok <- smok[-dim(smok)[1], -dim(smok)[2]]
 row.sum <- apply(smok, 1, sum)
 row.profile <- sweep(smok, 1, row.sum, "/")
 
