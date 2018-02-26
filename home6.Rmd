@@ -21,12 +21,85 @@ Form the row and column profiles.
 
 ```{r}
 smok <- read.table("data/SMOKING.txt", header = TRUE, row.names = 1)
-smok <- smok[-dim(smok)[1], -dim(smok)[2]]
+smok <- smok[-dim(smok)[1], -dim(smok)[2]] #remove the total col/row
+# View(smok)
+D <- as.matrix(smok)
+prop.table(D, 1) # row profiles
+prop.table(D, 2) # col profiles
+
 row.sum <- apply(smok, 1, sum)
 row.profile <- sweep(smok, 1, row.sum, "/")
 
 col.sum <- apply(smok, 2, sum)
 col.profile <- sweep(smok, 2, col.sum, "/")
+```
+
+## chi-square test
+```{r}
+n <- sum(smok)
+v1 <- matrix(colSums(smok), nrow = 1)
+v2 <- matrix(rowSums(smok), ncol = 1)
+E <- v2 %*% v1 / n # theoretical frequencies under independence
+chi <- sum((D - E)^2 / E) # chi-square statistics
+I <- dim(D)[1]
+J <- dim(D)[2]
+pchisq(chi, df = ((I-1)*(J-1)), lower.tail = F) # p-value
+
+chisq.test(smok)
+
+```
+
+## Analysis ca
+
+```{r}
+library(ca)
+n <- sum(smok)
+smok.ca <- ca(smok)
+names(smok.ca)
+smok.ca$sv
+
+smok.ca$rowdist # Row chi-square distances to centroid
+smok.ca$rownames
+smok.ca$coldist
+smok.ca$colnames
+
+smok.ca$rowcoord # caled coordinates
+smok.ca$colcoord
+
+smok.ca$rowcoord[1,]*smok.ca$sv*1000 # coordinates in the summary
+
+sqrt(sum((smok.ca$rowcoord[1,]*smok.ca$sv)^2)) # distance from the center for SM
+
+smok.ca$rowinertia 
+smok.ca$colinertia 
+
+#innertia is the chi squared statistic divided by n
+sum(smok.ca$rowinertia)
+sum(smok.ca$colinertia)
+sum(smok.ca$sv^2)
+chi/n
+
+#take an example
+sum((smok[1,] - E[1,])^2/E[1,])/n
+smok.ca$rowinertia[1]
+
+#proportional values, the same as in the summary
+smok.ca$rowinertia/sum(smok.ca$sv^2) * 1000
+
+# relative marginal frequencies of the original table
+smok.ca$rowmass
+rowSums(smok/n)
+smok.ca$colmass
+colSums(smok/n)
+
+# the original table
+smok.ca$N
+
+# quality of representation??
+
+# ctr, the contribution in forming that ca-component
+
+names(summary(smok.ca)$rows)
 ```
 
 ## Q2
@@ -37,6 +110,7 @@ and 3. Give the answer in percentages relative to the total variation.
 ```{r}
 library(ca)
 smok.ca <- ca(smok)
+summary(smok.ca)
 ```
 
 ## Q3
