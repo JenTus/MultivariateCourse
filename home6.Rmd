@@ -56,24 +56,24 @@ library(ca)
 n <- sum(smok)
 smok.ca <- ca(smok)
 names(smok.ca)
-smok.ca$sv
+smok.ca$sv # sqrt(lambda_i)
 
 smok.ca$rowdist # Row chi-square distances to centroid
 smok.ca$rownames
 smok.ca$coldist
 smok.ca$colnames
 
-smok.ca$rowcoord # caled coordinates
+smok.ca$rowcoord # scaled coordinates phi_ji/sqrt(lambda_i)
 smok.ca$colcoord
 
 smok.ca$rowcoord[1,]*smok.ca$sv*1000 # coordinates in the summary
 
 sqrt(sum((smok.ca$rowcoord[1,]*smok.ca$sv)^2)) # distance from the center for SM
 
+#innertia is the chi squared statistic divided by n
 smok.ca$rowinertia 
 smok.ca$colinertia 
 
-#innertia is the chi squared statistic divided by n
 sum(smok.ca$rowinertia)
 sum(smok.ca$colinertia)
 sum(smok.ca$sv^2)
@@ -89,17 +89,21 @@ smok.ca$rowinertia/sum(smok.ca$sv^2) * 1000
 # relative marginal frequencies of the original table
 smok.ca$rowmass
 rowSums(smok/n)
+margin.table(as.matrix(smok), 1)/sum(smok)
 smok.ca$colmass
 colSums(smok/n)
 
 # the original table
 smok.ca$N
 
-# quality of representation??
+# ctr, the contribution in forming that ca-component, SM
+margins <- smok.ca$rowmass
+margins[1]*smok.ca$rowcoord[1,2]^2 # ctr
 
-# ctr, the contribution in forming that ca-component
-
-names(summary(smok.ca)$rows)
+# quality of representation --- Squared correlation
+# Squared correlation of SM, quality of representation
+d1 = (smok.ca$rowcoord[1,]*smok.ca$sv)^2 # sum(phi_ij^2)
+d1/sum(d1)
 ```
 
 ## Q2
@@ -110,6 +114,7 @@ and 3. Give the answer in percentages relative to the total variation.
 ```{r}
 library(ca)
 smok.ca <- ca(smok)
+smok.ca$sv^2/sum(smok.ca$sv^2)
 summary(smok.ca)
 ```
 
@@ -118,7 +123,10 @@ summary(smok.ca)
 Produce the BCA graph with respect to the first two components.
 
 ```{r}
-plot(smok.ca, arrows=c(TRUE, T))
+library
+plot(smok.ca, arrows=c(TRUE, T), map = "symmetric")
+plot(smok.ca, arrows=c(TRUE, T), map = "symmetric", dim = c(1,3))
+plot(smok.ca, arrows = c(T, T), map = "rowprincipal")
 ```
 
 ## Q4
@@ -129,18 +137,13 @@ by the first two components? Give the answers in percentages relative to the
 total variation. Hint: use the quality of representation.
 
 ```{r}
-n <- sum(smok)
-ca.row <- smok.ca$rowcoord
-f_row <- row.sum / n
+# the variation of the modality Heavy explained by the first two components
+h <- (smok.ca$colcoord[4,]*smok.ca$sv)^2
+sum(h[c(1,2)])/sum(h)
 
-ca.col <- smok.ca$colcoord
-f_col <- col.sum / n 
-
-#the modality Heavy explained by the first two components.
-sum(ca.col["Heavy",c(1,2)]*ca.col["Heavy",c(1,2)])/sum(ca.col["Heavy",]*ca.col["Heavy",])
-
-#the modality Medium explained by the first two components.
-sum(ca.col["Medium",c(1,2)]*ca.col["Medium",c(1,2)])/sum(ca.col["Medium",]*ca.col["Medium",])
+# the variation of the modality Medium explained by the first two components
+m <- (smok.ca$colcoord[3,]*smok.ca$sv)^2
+sum(m[c(1,2)])/sum(m)
 ```
 
 
