@@ -3,6 +3,5 @@
 .RData
 .Ruserdata
 # ignore home*_files folder
-home*_files/
-data/
+*/
 *.Rmd
