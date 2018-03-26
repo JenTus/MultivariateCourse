@@ -9,7 +9,7 @@ Simulate 100 observations from bivariate normal distribution.
 Q1
 --
 
-Plot the data. Label the data points with the corresponding observation num- ber.
+Plot the data. Label the data points with the corresponding observation number.
 
 ``` r
 library(mvtnorm)
@@ -29,11 +29,6 @@ Q2
 
 Perform the covariance based PCA transformation to the data set.
 
-``` r
-x.pca <- princomp(x_frame, cor = F, scale = F) # covariance based princomp
-names(x.pca)
-```
-
     ## [1] "sdev"     "loadings" "center"   "scale"    "n.obs"    "scores"  
     ## [7] "call"
 
@@ -48,7 +43,7 @@ plot(pca_frame, xlab = "Comp1", ylab = "Comp2", xlim = c(-20, 20), ylim = c(-20,
 text(pca_frame$Comp.1, pca_frame$Comp.2,labels = rownames(pca_frame))
 ```
 
-![](home2_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](home2_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 Q4
 --
@@ -87,4 +82,4 @@ arrows(pca1[1], pca1[2], pca1[3], pca1[4])
 arrows(pca2[1], pca2[2], pca2[3], pca2[4])
 ```
 
-![](home2_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](home2_files/figure-markdown_github/unnamed-chunk-4-1.png)

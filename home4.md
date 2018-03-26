@@ -24,4 +24,4 @@ ggplot(df, aes(df$y, df$IF)) +
   labs(x = "y", y = "IF")
 ```
 
-![](home4_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](home4_files/figure-markdown_github/cars-1.png)

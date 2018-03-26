@@ -4,4 +4,4 @@
 .Ruserdata
 # ignore home*_files folder
 */
-*.Rmd
+*.rmd

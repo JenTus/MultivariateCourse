@@ -39,13 +39,6 @@ Q2
 
 Calculate the attraction repulsion matrix.
 
-``` r
-AR.matrix <- tb/E  #D = original data (number of observations), 
-#E = expected number of observations under independence
-
-AR.matrix
-```
-
     ##         None     Light    Medium     Heavy
     ## SM 1.1505216 0.7797980 0.8489736 1.4036364
     ## JM 0.7030965 0.7148148 1.2105735 1.7155556
@@ -58,19 +51,4 @@ Q3
 
 Is smoking more frequent among a specific group in this company?
 
-``` r
-library(ggplot2)
-library(reshape)
-
-melted <- melt(AR.matrix)
-#View(melted)
-#range(melted$value)
-melted$X2 <- factor(melted$X2, levels = c("None", "Light","Medium", "Heavy"))
-ggplot(melted, aes(x=X1, y=X2, fill=value)) +
-  geom_tile() +
-  scale_fill_gradient2(low = "blue", high = "red", mid = "white",
-                       midpoint = median(melted$value), limit = c(0.5, 1.88),
-                       name="AR value")
-```
-
-![](home5_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](home5_files/figure-markdown_github/pressure-1.png)

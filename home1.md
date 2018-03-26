@@ -4,7 +4,7 @@ Homework1
 Q1
 --
 
-Create an R-function that takes a data matrix *X* ∈ ℝ<sup>*n* × *p*</sup>, *n* &gt; *p*, as an argument and returns the unbiased estimator of the covariance matrix. Do not use the built-in functions cov(), cor() or any additional R-packages.
+Create an R-function that takes a data matrix *X* ∈ ℝ<sup>*n* × *p*</sup>, *n* &gt; *p* as an argument and returns the unbiased estimator of the covariance matrix. Do not use the built-in functions cov(), cor() or any additional R-packages.
 
 Code of Q1
 ----------
@@ -42,10 +42,7 @@ D1.cov
 Q2
 --
 
-Create an R-function that takes a full-rank covariance matrix *A* ∈ ℝ<sup>*p* × *p*</sup> as an argument and returns the square root of the inverse matrix such that $A^{-\\frac{1}{2}}A^{-\\frac{1}{2}} = A^{-1}$
-
-Code of Q2
-----------
+Create an R-function that takes a full-rank covariance matrix *A* ∈ ℝ<sup>*p* × *p*</sup>as an argument and returns the square root of the inverse matrix such that $A^{-\\frac{1}{2}}A^{-\\frac{1}{2}} = A^{-1}$
 
 ``` r
 trans_square_root <- function(x){
@@ -70,9 +67,6 @@ Q3
 --
 
 Create an R-function that takes a full-rank covariance matrix A as an argument and returns the corresponding correlation matrix.
-
-Code of Q3
-----------
 
 ``` r
 correlation <- function(x){

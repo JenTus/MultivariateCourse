@@ -1,4 +1,4 @@
-Bivariate Correspondence Analysis
+home6
 ================
 
 Bivariate Correspondence Analysis
@@ -48,22 +48,7 @@ col.profile <- sweep(smok, 2, col.sum, "/")
 chi-square test
 ---------------
 
-``` r
-n <- sum(smok)
-v1 <- matrix(colSums(smok), nrow = 1)
-v2 <- matrix(rowSums(smok), ncol = 1)
-E <- v2 %*% v1 / n # theoretical frequencies under independence
-chi <- sum((D - E)^2 / E) # chi-square statistics
-I <- dim(D)[1]
-J <- dim(D)[2]
-pchisq(chi, df = ((I-1)*(J-1)), lower.tail = F) # p-value
-```
-
     ## [1] 0.1718348
-
-``` r
-chisq.test(smok)
-```
 
     ## Warning in chisq.test(smok): Chi-squared approximation may be incorrect
 
@@ -203,14 +188,12 @@ smok.ca$rowinertia[1]
     ## [1] 0.002672932
 
 ``` r
-#proportional values, the same as in the summary
 smok.ca$rowinertia/sum(smok.ca$sv^2) * 1000
 ```
 
     ## [1]  31.37618 139.46703 449.74987 308.35392  71.05300
 
 ``` r
-# relative marginal frequencies of the original table
 smok.ca$rowmass
 ```
 
@@ -325,19 +308,19 @@ Produce the BCA graph with respect to the first two components.
 plot(smok.ca, arrows=c(TRUE, T), map = "symmetric")
 ```
 
-![](home6_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](home6_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
 ``` r
 plot(smok.ca, arrows=c(TRUE, T), map = "symmetric", dim = c(1,3))
 ```
 
-![](home6_files/figure-markdown_github/unnamed-chunk-5-2.png)
+![](home6_files/figure-markdown_github/unnamed-chunk-4-2.png)
 
 ``` r
 plot(smok.ca, arrows = c(T, T), map = "rowprincipal")
 ```
 
-![](home6_files/figure-markdown_github/unnamed-chunk-5-3.png)
+![](home6_files/figure-markdown_github/unnamed-chunk-4-3.png)
 
 Q4
 --
