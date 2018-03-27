@@ -138,7 +138,25 @@ summary(tb.mca)
 
 Produce the MCA graph with respect to the components chosen in (a).
 
-![](home7_files/figure-markdown_github/pressure-1.png)
+``` r
+# plot
+# data frame for ggplot
+tb_mca_df = data.frame(tb.mca$colcoord, Variable = rep(names(tb.mca$levels.n), tb.mca$levels.n))
+rownames(tb_mca_df) = tb.mca$levelnames
+
+# plot
+xx = round(tb.mca$sv[1]^2/sum(tb.mca$sv^2)*100, 2)
+yy = round(tb.mca$sv[2]^2/sum(tb.mca$sv^2)*100, 2)
+ggplot(data = tb_mca_df, 
+       aes(x = X1, y = X2, label = rownames(tb_mca_df))) +
+  geom_hline(yintercept = 0, colour = "gray70") +
+  geom_vline(xintercept = 0, colour = "gray70") +
+  geom_text(aes(colour = Variable)) +
+  geom_segment(mapping=aes(x=0, y=0, xend=X1, yend=X2, colour = Variable), arrow=arrow(length=unit(0.2,"cm")), size=0.3) + 
+  labs(x = paste("pca1 = ", xx,"%",sep=""), y = paste("pca2 = ", yy,"%",sep="")) 
+```
+
+![](home7_files/figure-markdown_github/unnamed-chunk-1-1.png)
 
 What is the relationship between education and strong opinions (strongly agree/strongly disagree) in this data set? Justify!
 
@@ -155,4 +173,4 @@ for(i in 1 : length(questions)){
 }
 ```
 
-![](home7_files/figure-markdown_github/unnamed-chunk-1-1.png)
+![](home7_files/figure-markdown_github/unnamed-chunk-2-1.png)
